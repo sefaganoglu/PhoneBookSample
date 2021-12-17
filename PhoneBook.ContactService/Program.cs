@@ -1,5 +1,6 @@
 using ContactService.DAL;
 using Microsoft.EntityFrameworkCore;
+using PhoneBook.Library.Services;
 using System.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ContactDbContext>(option => option.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<INLogService, NLogService>();
 
 var app = builder.Build();
 

@@ -25,4 +25,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PhoneBook.Library\PhoneBook.Library.csproj" />
+  </ItemGroup>
+
 </Project>
