@@ -1,4 +1,4 @@
-﻿namespace PhoneBook.Library.Dto
+﻿namespace PhoneBook.Library.Dto.Response
 {
     public class ResDto<T>
     {

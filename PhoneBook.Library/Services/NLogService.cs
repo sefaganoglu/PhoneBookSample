@@ -1,4 +1,4 @@
-﻿using PhoneBook.Library.Dto;
+﻿using PhoneBook.Library.Dto.Response;
 
 namespace PhoneBook.Library.Services
 {

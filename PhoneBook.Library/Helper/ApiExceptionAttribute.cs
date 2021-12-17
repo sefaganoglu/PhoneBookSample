@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using PhoneBook.Library.Dto;
+using PhoneBook.Library.Dto.Response;
 using PhoneBook.Library.Services;
 
 namespace PhoneBook.Library.Helper
