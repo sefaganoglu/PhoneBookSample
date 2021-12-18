@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.ContactService", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.ReportService", "PhoneBook.ReportService\PhoneBook.ReportService.csproj", "{F5833893-C51C-4C0B-A0AD-04C691E63F66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBook.Library", "PhoneBook.Library\PhoneBook.Library.csproj", "{E304992F-10B7-4CC2-993F-423B94E6E06A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhoneBook.Library", "PhoneBook.Library\PhoneBook.Library.csproj", "{E304992F-10B7-4CC2-993F-423B94E6E06A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Microservices", "Microservices", "{3BDFE8FD-3E28-4F62-8715-BE78D9361F88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{23052E5E-DD17-469A-BEA7-7D7909984F1B} = {3BDFE8FD-3E28-4F62-8715-BE78D9361F88}
+		{F5833893-C51C-4C0B-A0AD-04C691E63F66} = {3BDFE8FD-3E28-4F62-8715-BE78D9361F88}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {694E2173-B13E-48D2-83D8-CD17568D474D}
