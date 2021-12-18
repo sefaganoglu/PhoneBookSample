@@ -26,7 +26,10 @@ namespace ContactService.Controllers
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<List<ResPersonListDto>>> List()
         {
-            var persons = _context.People;
+            var persons = await _context.People
+                                        .OrderBy(p => p.Name )
+                                        .ThenByDescending(p => p.Surname)
+                                        .ToListAsync();
 
             var dto = new List<ResPersonListDto>();
 
@@ -43,10 +46,10 @@ namespace ContactService.Controllers
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ResPersonGetDto>> Get(Guid personId)
         {
-            var person = _context.People.Include(p => p.ContactInfos).Where(p => p.Id == personId).FirstOrDefault();
+            var person = await _context.People.Include(p => p.ContactInfos).Where(p => p.Id == personId).FirstOrDefaultAsync();
             if (person == null)
             {
-                return BadRequest("Person is not found.");
+                return BadRequest("Person not found.");
             }
 
             return Ok(person.ToGetDto());
@@ -77,10 +80,10 @@ namespace ContactService.Controllers
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Guid>> Put([FromBody] ReqPersonPutDto dto)
         {
-            var person = _context.People.Where(p => p.Id == dto.Id).FirstOrDefault();
+            var person = await _context.People.Where(p => p.Id == dto.Id).FirstOrDefaultAsync();
             if (person == null)
             {
-                return BadRequest("Person is not found.");
+                return BadRequest("Person not found.");
             }
 
             person.Name = dto.Name;
@@ -98,10 +101,10 @@ namespace ContactService.Controllers
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Guid>> Delete(Guid personId)
         {
-            var person = _context.People.Where(p => p.Id == personId).FirstOrDefault();
+            var person = await _context.People.Where(p => p.Id == personId).FirstOrDefaultAsync();
             if (person == null)
             {
-                return BadRequest("Person is not found.");
+                return BadRequest("Person not found.");
             }
 
             _context.Entry(person).State = EntityState.Deleted;

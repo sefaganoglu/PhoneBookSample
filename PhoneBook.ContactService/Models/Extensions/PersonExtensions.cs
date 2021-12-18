@@ -23,6 +23,7 @@ namespace PhoneBook.ContactService.Models.Extensions
 
             return dto;
         }
+
         public static ResPersonListDto ToListDto(this Person person)
         {
             var dto = new ResPersonListDto()

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PhoneBook.Library;
 using PhoneBook.Library.Dto.Request;
+using PhoneBook.Library.Dto.Response;
 
 namespace ContactService.Controllers
 {
@@ -18,6 +19,24 @@ namespace ContactService.Controllers
         {
             _context = context;
         }
+        
+        [HttpGet("[action]")]
+        [ProducesResponseType(typeof(List<ResContactInfoReportDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<List<ResContactInfoReportDto>>> Report()
+        {
+            var report = await _context.ContactInfos.Include(p => p.Person)
+                                        .GroupBy(p => p.Location)
+                                        .Select(p => new ResContactInfoReportDto() { 
+                                            Location = p.Key, 
+                                            PersonCount = p.Select(q => q.PersonId).Distinct().Count(),
+                                            PhoneCount = p.Count()
+                                        })
+                                        .OrderBy(p => p.Location)
+                                        .ToListAsync();
+
+            return Ok(report);
+        }
 
         [HttpPost("[action]")]
         [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
@@ -27,7 +46,7 @@ namespace ContactService.Controllers
             var person = _context.People.Where(p => p.Id == dto.PersonId).FirstOrDefault();
             if (person == null)
             {
-                return BadRequest("Person is not found.");
+                return BadRequest("Person not found.");
             }
 
             var contactInfo = new ContactInfo()
@@ -54,13 +73,13 @@ namespace ContactService.Controllers
             var person = _context.People.Where(p => p.Id == dto.PersonId).FirstOrDefault();
             if (person == null)
             {
-                return BadRequest("Person is not found.");
+                return BadRequest("Person not found.");
             }
 
             var contactInfo = _context.ContactInfos.Where(p => p.Id == dto.Id).FirstOrDefault();
             if (contactInfo == null)
             {
-                return BadRequest("Contact info is not found.");
+                return BadRequest("Contact info not found.");
             }
 
             contactInfo.PersonId = dto.PersonId;
@@ -77,12 +96,12 @@ namespace ContactService.Controllers
         [HttpDelete("[action]")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(void), StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Guid>> Delete(Guid contactInfoId)
+        public async Task<ActionResult<bool>> Delete(Guid contactInfoId)
         {
             var contactInfo = _context.ContactInfos.Where(p => p.Id == contactInfoId).FirstOrDefault();
             if (contactInfo == null)
             {
-                return BadRequest("Contact info is not found.");
+                return BadRequest("Contact info not found.");
             }
 
             _context.Entry(contactInfo).State = EntityState.Deleted;

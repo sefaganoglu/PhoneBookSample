@@ -39,6 +39,8 @@ namespace ContactService.DAL
                       .HasForeignKey(d => d.PersonId)
                       .OnDelete(DeleteBehavior.ClientSetNull)
                       .HasConstraintName("FK_ContactInfos_People");
+
+                entity.HasIndex(p => p.Location);
             });
 
             modelBuilder.Entity<Person>(entity =>

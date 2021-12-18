@@ -1,7 +1,6 @@
 using ContactService.DAL;
 using Microsoft.EntityFrameworkCore;
 using PhoneBook.Library.Services;
-using System.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 
