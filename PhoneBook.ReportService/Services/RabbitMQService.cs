@@ -7,7 +7,14 @@ using System.Text;
 
 namespace PhoneBook.ReportService.Services
 {
-    public class RabbitMQService
+    public interface IRabbitMQService
+    {
+        bool Connect();
+        bool Consume(EventingBasicConsumer consumerEvent);
+        bool WriteToCreateReportQueue(Guid reportInfoId);
+    }
+
+    public class RabbitMQService : IRabbitMQService
     {
         private readonly string queueCreateReport = "create_report_queue";
         private readonly string exchangeReportCreate = "report_create_exchange";
@@ -29,7 +36,7 @@ namespace PhoneBook.ReportService.Services
             };
 
             return connectionFactory.CreateConnection();
-        }     
+        }
 
         private IModel GetChannel()
         {
@@ -67,7 +74,7 @@ namespace PhoneBook.ReportService.Services
         public bool Consume(EventingBasicConsumer consumerEvent)
         {
             Channel.BasicConsume(queueCreateReport, false, consumerEvent);
-            
+
             return true;
         }
     }

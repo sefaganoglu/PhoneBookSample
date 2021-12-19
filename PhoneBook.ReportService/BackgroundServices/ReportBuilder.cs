@@ -15,9 +15,9 @@ namespace PhoneBook.ReportService.BackgroundServices
         private RabbitMQService _rabbitMQService;
         private ContactApiService _contactApiService;
         private IServiceScopeFactory _serviceScopeFactory;
-        public ReportBuilder(RabbitMQService rabbitMQManager, ContactApiService contactApiService, IServiceScopeFactory serviceScopeFactory)
+        public ReportBuilder(IRabbitMQService rabbitMQManager, ContactApiService contactApiService, IServiceScopeFactory serviceScopeFactory)
         {
-            _rabbitMQService = rabbitMQManager;
+            _rabbitMQService = ((RabbitMQService)rabbitMQManager);
             _contactApiService = contactApiService;
             _serviceScopeFactory = serviceScopeFactory;
         }

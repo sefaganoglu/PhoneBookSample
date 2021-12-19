@@ -1,16 +1,21 @@
 using ContactService.DAL;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using PhoneBook.Library.Middlewares;
 using PhoneBook.Library.Services;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(option => option.Filters.Add<ServiceExceptionInterceptor>());
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ContactDbContext>(option => option.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<INLogService, NLogService>();
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 
