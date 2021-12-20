@@ -10,14 +10,14 @@ Bu örnek bir telefon rehberi uygulamasıdır. Bu projede mikroservis mimarisi, 
 # Mikroservisler ve Endpointler
 ### ContactService ve Endpointleri
 Bu servis, telefon rehberinde yeni kişi oluşturma, bu kişiyi çağırma, düzenleme, silme ve kişi listesini çekme işlemleri için kullanılır. Endpointler aşağıdaki gibidir.
-- List: Telefon rehberindeki kişilerin listesini çekmek için kullanılır.
-- Get: Telefon rehberindeki herhangi bir kişinin iletişim bilgileri de dahil bütün detaylarını çekmek için kullanılır.
-- Post: Telefon rehberine yeni bir kişi eklemek için kullanılır.
-- Put: Telefon rehberindeki bir kişinin iletişim bilgileri hariç diğer bilgilerini düzenlemek için kullanılır.
-- Delete: Telefon rehberinden bir kişiyi silmek için kullanılır.
+- List (HTTP Method: GET): Telefon rehberindeki kişilerin listesini çekmek için kullanılır.
+- Get (HTTP Method: GET): Telefon rehberindeki herhangi bir kişinin iletişim bilgileri de dahil bütün detaylarını çekmek için kullanılır.
+- Post (HTTP Method: POST): Telefon rehberine yeni bir kişi eklemek için kullanılır.
+- Put (HTTP Method: PUT): Telefon rehberindeki bir kişinin iletişim bilgileri hariç diğer bilgilerini düzenlemek için kullanılır.
+- Delete (HTTP Method: DELETE): Telefon rehberinden bir kişiyi silmek için kullanılır.
 
 ### ReportService ve Endpointleri
 Bu servis, telefon rehberindeki kişilerin lokasyon bilgilerine göre gruplanmış halde kişi ve telefon no sayısını gösteren raporu CSV dosya formatında indirebilmek için kullanılır. İlk önce rapor isteği gönderilir. Bu istek veritabanına kaydolur, kuyruğa düşer (RabbitMQ) ve rapor hazırlanana kadar bekler. Rapor hazırlandığı zaman ise indirmeye hazır demektir.
-- List: Rapor isteklerinin listesini çekmek için kullanılır.
-- Post: Yeni bir rapor isteği oluşturmak için kullanılır. Bu çalıştırıldığında RabbitMQ kuyruğuna yeni bir istek gönderir.
-- Download: Hazırlanan raporun indirilebilmesi için kullanılır.
+- List (HTTP Method: GET): Rapor isteklerinin listesini çekmek için kullanılır.
+- Post (HTTP Method: POST): Yeni bir rapor isteği oluşturmak için kullanılır. Bu çalıştırıldığında RabbitMQ kuyruğuna yeni bir istek gönderir.
+- Download (HTTP Method: GET): Hazırlanan raporun indirilebilmesi için kullanılır.
