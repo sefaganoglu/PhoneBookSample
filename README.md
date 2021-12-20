@@ -1,5 +1,5 @@
 # PhoneBookSample
-Bu örnek bir telefon rehberi uygulamasıdır. Bu projede mikroservis mimarisi, .NET Core, PostgreSQL ve RabbitMQ kullanılmıştır.
+Bu örnek bir telefon rehberi uygulamasıdır. Bu projede mikroservis mimarisi, .NET 6, MediatR, PostgreSQL ve RabbitMQ kullanılmıştır.
 
 # Nasıl Çalıştırılır
 - Her bir mikroservise ait appsettings.json dosyalarının içerisinde bulunan ConnectionString bilgileri PostgreSQL Server ile çalışmaya uygun hale getirilir.
